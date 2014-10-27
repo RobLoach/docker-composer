@@ -6,8 +6,8 @@ Composer Docker Container
 Features
 --------
 
-* [Composer](http://getcomposer.org) 1.0.0-alpha8
-* [PHP](http://php.net) 5.6.2
+* [Composer](http://getcomposer.org) [1.0.0-alpha8](https://github.com/composer/composer/blob/1.0.0-alpha8/CHANGELOG.md)
+* [PHP](http://php.net) [5.6.2](http://php.net/ChangeLog-5.php#5.6.2)
 
 Installation / Usage
 --------------------
@@ -15,7 +15,7 @@ Installation / Usage
 1. Install the `composer/composer` container:
 
     ``` sh
-    docker pull composer/composer
+    $ docker pull composer/composer
     ```
 
 2. Create a composer.json defining your dependencies. Note that this example is
@@ -34,7 +34,7 @@ themselves. To create libraries/packages please read the
 3. Run Composer through the Composer container:
 
     ``` sh
-    docker run -v $(pwd):/app composer/composer install
+    $ docker run -v $(pwd):/app composer/composer install
     ```
 
 Installation from Source
@@ -43,10 +43,26 @@ Installation from Source
 To run, test and develop the Composer Dockerfile itself, you must use the
 source directly:
 
-1. Run `git clone https://github.com/RobLoach/composer-docker.git`
-2. Switch to the `composer-docker` directory with `cd composer-docker`
+1. Download the source:
+
+    ``` sh
+    $ git clone https://github.com/RobLoach/composer-docker.git
+    ```
+
+2. Switch to the `composer-docker` directory:
+
+    ``` sh
+    $ cd composer-docker
+    ```
+
 3. Build the container:
 
     ``` sh
-    docker build -t composer/composer .
+    $ docker build -t composer/composer .
+    ```
+
+4. Test running the container:
+
+    ``` sh
+    $ docker run composer/composer help
     ```
