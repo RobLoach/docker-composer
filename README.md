@@ -6,7 +6,9 @@ Composer Docker Container
 Features
 --------
 
-* [Composer](http://getcomposer.org) [1.0.0-alpha8](https://github.com/composer/composer/blob/1.0.0-alpha8/CHANGELOG.md)
+* [Composer](http://getcomposer.org)
+  * Latest snapshot
+  * [`1.0.0-alpha8`](https://github.com/composer/composer/blob/1.0.0-alpha8/CHANGELOG.md)
 * [PHP](http://php.net) [5.6.2](http://php.net/ChangeLog-5.php#5.6.2)
 
 Installation / Usage
@@ -55,10 +57,10 @@ source directly:
     $ cd composer-docker
     ```
 
-3. Build the container:
+3. Build the container, using Composer's latest `master` release:
 
     ``` sh
-    $ docker build -t composer/composer .
+    $ docker build -t composer/composer master
     ```
 
 4. Test running the container:
