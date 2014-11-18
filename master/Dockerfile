@@ -1,8 +1,9 @@
 # Composer Docker Container
-FROM php:5.6.2-cli
+FROM php:5.6-cli
 MAINTAINER Rob Loach <robloach@gmail.com>
 
-# PHP Extension: Zip
+# Dependencies
+RUN apt-get install -y php5-curl php5-gd php5-json php5-mcrypt php5-mysql php5-pgsql php5-readline php5-sqlite sqlite3 mysql-client php5-mysql
 RUN pecl install zip
 RUN echo "extension=zip.so" >> /usr/local/lib/php.ini
 
