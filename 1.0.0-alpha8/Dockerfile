@@ -2,9 +2,16 @@
 FROM php:5.6-cli
 MAINTAINER Rob Loach <robloach@gmail.com>
 
+ENV DEBIAN_FRONTEND noninteractive
+
 # Dependencies
 RUN apt-get update
+RUN apt-get upgrade -y
+RUN apt-get install -y zlib1g zlib1g-dev
 RUN apt-get install -y php5-curl php5-gd php5-json php5-mcrypt php5-mysql php5-pgsql php5-readline php5-sqlite sqlite3 mysql-client php5-mysql
+
+# Enable any modules
+RUN php5enmod curl json mysql mysqli pdo_mysql pdo_sqlite readline gd mcrypt pdo sqlite3
 RUN pecl install zip
 RUN echo "extension=zip.so" >> /usr/local/lib/php.ini
 
