@@ -8,6 +8,7 @@ Features
 
 * [Composer](http://getcomposer.org)
   * Latest snapshot (`master`)
+  * [`1.0.0-alpha9`](https://github.com/composer/composer/blob/1.0.0-alpha9/CHANGELOG.md)
   * [`1.0.0-alpha8`](https://github.com/composer/composer/blob/1.0.0-alpha8/CHANGELOG.md)
 * [PHP](http://php.net) [5.6](http://php.net/ChangeLog-5.php)
 
@@ -18,6 +19,11 @@ Installation / Usage
 
     ``` sh
     $ docker pull composer/composer
+    ```
+
+  Another alternative is to pull a specific version of `composer/composer`:
+    ``` sh
+    $ docker pull composer/composer:1.0.0-alpha9
     ```
 
 2. Create a composer.json defining your dependencies. Note that this example is
@@ -37,6 +43,10 @@ themselves. To create libraries/packages please read the
 
     ``` sh
     $ docker run -v $(pwd):/app composer/composer install
+    ```
+  Or run using a specific version of Composer:
+    ``` sh
+    $ docker run -v $(pwd):/app composer/composer:1.0.0-alpha9 install
     ```
 
 Installation from Source
