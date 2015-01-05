@@ -21,7 +21,7 @@ Installation / Usage
     $ docker pull composer/composer
     ```
 
-  Another alternative is to pull a specific version of `composer/composer`:
+  Alternatively, pull a specific version of `composer/composer`:
     ``` sh
     $ docker pull composer/composer:1.0.0-alpha9
     ```
@@ -73,7 +73,7 @@ source directly:
     $ docker build -t composer/composer master
     ```
 
-4. Test running the container:
+4. Test running Composer through the container:
 
     ``` sh
     $ docker run composer/composer help
