@@ -18,6 +18,9 @@ RUN php5enmod curl json mysql mysqli pdo_mysql pdo_sqlite readline gd mcrypt pdo
 RUN pecl install zip
 RUN echo "extension=zip.so" > /usr/local/etc/php/conf.d/extension-zip.ini
 
+# Set memory limit
+RUN echo "memory_limit=1024M" > /etc/php5/cli/conf.d/composer-docker-memory-limit.ini
+
 # Set environmental variables
 ENV COMPOSER_HOME /root/composer
 
