@@ -19,7 +19,7 @@ RUN pecl install zip
 RUN echo "extension=zip.so" > /usr/local/etc/php/conf.d/extension-zip.ini
 
 # Set memory limit
-RUN echo "memory_limit=1024M" > /etc/php5/cli/conf.d/composer-docker-memory-limit.ini
+RUN echo "memory_limit=1024M" > /usr/local/etc/php/conf.d/memory-limit.ini
 
 # Set environmental variables
 ENV COMPOSER_HOME /root/composer
