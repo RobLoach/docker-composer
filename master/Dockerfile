@@ -28,4 +28,4 @@ WORKDIR /app
 
 # Set up the command arguments
 CMD ["-"]
-ENTRYPOINT ["composer", "--ansi", "--ignore-platform-reqs"]
+ENTRYPOINT ["composer", "--ansi"]
