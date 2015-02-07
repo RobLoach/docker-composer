@@ -2,11 +2,8 @@
 FROM php:5.6-cli
 MAINTAINER Rob Loach <robloach@gmail.com>
 
-ENV DEBIAN_FRONTEND noninteractive
-
 # Dependencies
-RUN apt-get update
-RUN apt-get install -y zlib1g-dev git mercurial subversion
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y zlib1g-dev git mercurial subversion --no-install-recommends && rm -r /var/lib/apt/lists/*
 RUN docker-php-ext-install zip
 
 # Set memory limit
