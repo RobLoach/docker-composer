@@ -8,6 +8,7 @@ Features
 
 * [Composer](http://getcomposer.org)
   * Latest snapshot (`master`)
+  * [`1.0.0-alpha10`](https://github.com/composer/composer/blob/1.0.0-alpha10/CHANGELOG.md)
   * [`1.0.0-alpha9`](https://github.com/composer/composer/blob/1.0.0-alpha9/CHANGELOG.md)
   * [`1.0.0-alpha8`](https://github.com/composer/composer/blob/1.0.0-alpha8/CHANGELOG.md)
 * [PHP](http://php.net) [5.6](http://php.net/ChangeLog-5.php)
