@@ -5,7 +5,7 @@
 ## Features
 
 * [Composer](http://getcomposer.org)
-  * Latest snapshot (`master`)
+  * Latest snapshot: `master`
   * [`1.0.0-alpha10`](https://github.com/composer/composer/blob/1.0.0-alpha10/CHANGELOG.md)
   * [`1.0.0-alpha9`](https://github.com/composer/composer/blob/1.0.0-alpha9/CHANGELOG.md)
   * [`1.0.0-alpha8`](https://github.com/composer/composer/blob/1.0.0-alpha8/CHANGELOG.md)
@@ -21,7 +21,7 @@
 
   Alternatively, pull a specific version of `composer/composer`:
     ``` sh
-    $ docker pull composer/composer:1.0.0-alpha9
+    $ docker pull composer/composer:1.0.0-alpha10
     ```
 
 2. Create a composer.json defining your dependencies. Note that this example is
@@ -44,7 +44,7 @@ themselves. To create libraries/packages please read the
     ```
   Or run using a specific version of Composer:
     ``` sh
-    $ docker run -v $(pwd):/app composer/composer:1.0.0-alpha9 install
+    $ docker run -v $(pwd):/app composer/composer:1.0.0-alpha10 install
     ```
 
 ## Installation from Source
