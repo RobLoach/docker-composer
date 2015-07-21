@@ -25,7 +25,7 @@ RUN docker-php-ext-install mcrypt zip bz2 mbstring \
 RUN echo "memory_limit=1024M" > /usr/local/etc/php/conf.d/memory-limit.ini
 
 # Time Zone
-RUN echo "date.timezone=${PHP_TIMEZONE:-UTC}" > /etc/php5/cli/conf.d/date_timezone.ini
+RUN echo "date.timezone=${PHP_TIMEZONE:-UTC}" > /usr/local/etc/php/conf.d/date_timezone.ini
 
 # Environmental Variables
 ENV COMPOSER_HOME /root/composer
