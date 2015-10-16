@@ -7,6 +7,3 @@ ENV COMPOSER_VERSION 1.0.0-alpha10
 # Install Composer
 RUN php -r "readfile('https://getcomposer.org/installer');" \
     | php -- --install-dir=/usr/local/bin --filename=composer --version=${COMPOSER_VERSION}
-
-# Display version information
-RUN ["composer", "--version"]
