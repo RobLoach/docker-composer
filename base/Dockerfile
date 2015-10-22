@@ -23,6 +23,9 @@ RUN apk add --update \
     unrar \
     && rm -rf /var/cache/apk/*
 
+# Environmental Variables
+ENV COMPOSER_HOME /root/composer
+
 # Set up the application directory
 VOLUME ["/app"]
 
