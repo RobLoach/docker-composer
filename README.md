@@ -54,31 +54,28 @@ themselves. To create libraries/packages please read the
 
 4. Add optional `composer` command to the host (tested on OS X El Capitan with docker-machine)
 
-Create new composer file
-```sh
-$ sudo vim /usr/local/bin/composer
-```
+  Create new composer file
+    ```sh
+    $ sudo vim /usr/local/bin/composer
+    ```
 
-The contents of the file will look like this:
+  The contents of the file will look like this:
+    ```sh
+    #!/bin/sh
+    export PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin
+    echo "Current working directory: '"$(pwd)"'"
+    docker run --rm -v $(pwd):/app -v ~/.ssh:/root/.ssh composer/composer $@
+    ```
 
-```sh
-#!/bin/sh
-export PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin
-echo "Current working directory: '"$(pwd)"'"
-docker run --rm -v $(pwd):/app -v ~/.ssh:/root/.ssh composer/composer $@
-```
+  Once the script has been made, it must be set as executable
+    ```sh
+    $ sudo chmod +x /usr/local/bin/composer
+    ```
 
-Once the script has been made, it must be set as executable
-
-```sh
-$ sudo chmod +x /usr/local/bin/composer
-```
-
-Now the `composer` command is available native on host:
-
-```sh
-$ composer --version
-```
+  Now the `composer` command is available native on host:
+    ```sh
+    $ composer --version
+    ```
 
 ## Installation from Source
 
@@ -99,9 +96,9 @@ source directly:
 
 3. Build the base container (in case of adaptions on the composer base image only)
 
-``` sh
-$ docker build -t composer/composer:base base
-```
+    ``` sh
+    $ docker build -t composer/composer:base base
+    ```
 
 4. Build the container, using Composer's latest `master` release:
 
