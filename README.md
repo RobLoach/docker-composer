@@ -65,13 +65,19 @@ source directly:
     $ cd composer-docker
     ```
 
-3. Build the container, using Composer's latest `master` release:
+3. Build the base container (in case of adaptions on the composer base image only)
+
+``` sh
+$ docker build -t composer/composer:base base
+```
+
+4. Build the container, using Composer's latest `master` release:
 
     ``` sh
-    $ docker build -t composer/composer master
+    $ docker build -t composer/composer:latest master
     ```
 
-4. Test running Composer through the container:
+5. Test running Composer through the container:
 
     ``` sh
     $ docker run composer/composer help
