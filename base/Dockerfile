@@ -24,7 +24,7 @@ RUN docker-php-ext-install mcrypt zip bz2 mbstring \
   && docker-php-ext-install gd
 
 # Memory Limit
-RUN echo "memory_limit=1024M" > $PHP_INI_DIR/conf.d/memory-limit.ini
+RUN echo "memory_limit=-1" > $PHP_INI_DIR/conf.d/memory-limit.ini
 
 # Time Zone
 RUN echo "date.timezone=${PHP_TIMEZONE:-UTC}" > $PHP_INI_DIR/conf.d/date_timezone.ini
