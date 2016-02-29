@@ -32,6 +32,9 @@ RUN echo "date.timezone=${PHP_TIMEZONE:-UTC}" > $PHP_INI_DIR/conf.d/date_timezon
 # Environmental Variables
 ENV COMPOSER_HOME /root/composer
 
+# Add global binary directory to path
+ENV PATH $COMPOSER_HOME/vendor/bin:$PATH
+
 # Display PHP version
 RUN php --version
 
