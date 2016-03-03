@@ -6,6 +6,7 @@
 
 * [Composer](http://getcomposer.org)
   * Latest snapshot: `master`
+  * [`1.0.0-beta1`](https://github.com/composer/composer/blob/1.0.0-beta1/CHANGELOG.md)
   * [`1.0.0-alpha11`](https://github.com/composer/composer/blob/1.0.0-alpha11/CHANGELOG.md)
   * [`1.0.0-alpha10`](https://github.com/composer/composer/blob/1.0.0-alpha10/CHANGELOG.md)
   * [`1.0.0-alpha9`](https://github.com/composer/composer/blob/1.0.0-alpha9/CHANGELOG.md)
@@ -22,7 +23,7 @@
 
   Alternatively, pull a specific version of `composer/composer`:
     ``` sh
-    $ docker pull composer/composer:1.0.0-alpha11
+    $ docker pull composer/composer:1.0.0-beta1
     ```
 
 2. Create a composer.json defining your dependencies. Note that this example is
