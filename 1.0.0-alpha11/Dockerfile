@@ -1,5 +1,5 @@
 # Composer Docker Container
-FROM composer/composer:php7-base
+FROM composer/composer:base
 MAINTAINER Rob Loach <robloach@gmail.com>
 
 ENV COMPOSER_VERSION 1.0.0-alpha11
