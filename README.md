@@ -6,6 +6,7 @@
 
 * [Composer](http://getcomposer.org)
   * Latest snapshot: `master`
+  * [`1.0.0-beta2`](https://github.com/composer/composer/blob/1.0.0-beta2/CHANGELOG.md)
   * [`1.0.0-beta1`](https://github.com/composer/composer/blob/1.0.0-beta1/CHANGELOG.md)
   * [`1.0.0-alpha11`](https://github.com/composer/composer/blob/1.0.0-alpha11/CHANGELOG.md)
   * [`1.0.0-alpha10`](https://github.com/composer/composer/blob/1.0.0-alpha10/CHANGELOG.md)
@@ -23,7 +24,7 @@
 
   Alternatively, pull a specific version of `composer/composer`:
     ``` sh
-    $ docker pull composer/composer:1.0.0-beta1
+    $ docker pull composer/composer:1.0.0-beta2
     ```
 
 2. Create a composer.json defining your dependencies. Note that this example is
@@ -46,7 +47,7 @@ themselves. To create libraries/packages please read the
     ```
   Or run using a specific version of Composer:
     ``` sh
-    $ docker run --rm -v $(pwd):/app composer/composer:1.0.0-alpha10 install
+    $ docker run --rm -v $(pwd):/app composer/composer:1.0.0-beta2 install
     ```
   If working with packages installed via git ssh the local .ssh directory shall be mapped into the container:
     ```sh
