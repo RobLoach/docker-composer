@@ -26,8 +26,8 @@ version:
 test:
 	docker run composer/composer diagnose
 	docker run composer/composer:latest diagnose
-	docker run composer/composer:master diagnose
 	docker run composer/composer:1.0.0 diagnose
+	docker run composer/composer:master --version
 	docker run composer/composer:1.0.0-beta2 --version
 	docker run composer/composer:1.0.0-beta1 --version
 	docker run composer/composer:1.0.0-alpha11 --version
