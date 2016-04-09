@@ -5,7 +5,8 @@
 ## Features
 
 * [Composer](http://getcomposer.org)
-  * Latest snapshot: `master`
+  * [`master`](https://github.com/composer/composer/blob/master/CHANGELOG.md): Latest snapshot
+  * [`latest`]: Latest stable release
   * [`1.0.0`](https://github.com/composer/composer/blob/1.0.0/CHANGELOG.md)
   * [`1.0.0-beta2`](https://github.com/composer/composer/blob/1.0.0-beta2/CHANGELOG.md)
   * [`1.0.0-beta1`](https://github.com/composer/composer/blob/1.0.0-beta1/CHANGELOG.md)
