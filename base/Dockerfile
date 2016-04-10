@@ -48,8 +48,8 @@ ENV COMPOSER_INSTALLER_SHA384 "7228c001f88bee97506740ef0888240bd8a760b046ee16db8
 RUN php -r "readfile('https://getcomposer.org/installer');" > /tmp/composer-setup.php \
   && php -r "if (hash('SHA384', file_get_contents('/tmp/composer-setup.php')) !== '${COMPOSER_INSTALLER_SHA384}') { unlink('/tmp/composer-setup.php'); echo 'Invalid installer' . PHP_EOL; exit(1); }"
 
-# Set up the application directory
-VOLUME ["/app"]
+# Set up the volumes and working directory
+VOLUME ["/app", "/root/composer"]
 WORKDIR /app
 
 # Set up the command arguments
