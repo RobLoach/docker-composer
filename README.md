@@ -1,4 +1,4 @@
-# Composer Docker Container
+# Composer Docker Container [![Build Status](https://travis-ci.org/RobLoach/docker-composer.svg?branch=master)](https://travis-ci.org/RobLoach/docker-composer)
 
 [Docker](http://docker.com) container to install and run [Composer](http://getcomposer.org).
 
