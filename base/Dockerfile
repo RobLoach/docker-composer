@@ -15,6 +15,7 @@ RUN apt-get update && \
     curl \
     git \
     subversion \
+    unzip \
   && rm -r /var/lib/apt/lists/*
 
 # PHP Extensions
@@ -23,16 +24,29 @@ RUN docker-php-ext-install mcrypt zip bz2 mbstring \
   && docker-php-ext-install gd
 
 # Memory Limit
-RUN echo "memory_limit=1024M" > $PHP_INI_DIR/conf.d/memory-limit.ini
+RUN echo "memory_limit=-1" > $PHP_INI_DIR/conf.d/memory-limit.ini
 
 # Time Zone
 RUN echo "date.timezone=${PHP_TIMEZONE:-UTC}" > $PHP_INI_DIR/conf.d/date_timezone.ini
 
+# Disable Populating Raw POST Data
+# Not needed when moving to PHP 7.
+# http://php.net/manual/en/ini.core.php#ini.always-populate-raw-post-data
+RUN echo "always_populate_raw_post_data=-1" > $PHP_INI_DIR/conf.d/always_populate_raw_post_data.ini
+
 # Environmental Variables
 ENV COMPOSER_HOME /root/composer
 
-# Display PHP version
-RUN php --version
+# Add global binary directory to path
+ENV PATH $COMPOSER_HOME/vendor/bin:$PATH
+
+# Allow Composer to be run as root
+ENV COMPOSER_ALLOW_SUPERUSER 1
+
+# Setup the Composer installer
+ENV COMPOSER_INSTALLER_SHA384 "7228c001f88bee97506740ef0888240bd8a760b046ee16db8f4095c0d8d525f2367663f22a46b48d072c816e7fe19959"
+RUN php -r "readfile('https://getcomposer.org/installer');" > /tmp/composer-setup.php \
+  && php -r "if (hash('SHA384', file_get_contents('/tmp/composer-setup.php')) !== '${COMPOSER_INSTALLER_SHA384}') { unlink('/tmp/composer-setup.php'); echo 'Invalid installer' . PHP_EOL; exit(1); }"
 
 # Set up the application directory
 VOLUME ["/app"]
