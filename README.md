@@ -83,6 +83,13 @@ themselves. To create libraries/packages please read the
     $ composer --version
     ```
 
+## Mountable Volumes
+
+Name | Description
+---- | -----------
+`/app` | The working directory for the application.
+`/composer` | The default [`COMPOSER_HOME`](https://getcomposer.org/doc/03-cli.md#composer-home) directory when running Composer.
+
 ## Installation from Source
 
 To run, test and develop the Composer Dockerfile itself, you must use the
