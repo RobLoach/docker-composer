@@ -35,7 +35,7 @@ RUN echo "date.timezone=${PHP_TIMEZONE:-UTC}" > $PHP_INI_DIR/conf.d/date_timezon
 RUN echo "always_populate_raw_post_data=-1" > $PHP_INI_DIR/conf.d/always_populate_raw_post_data.ini
 
 # Environmental Variables
-ENV COMPOSER_HOME /root/composer
+ENV COMPOSER_HOME /composer
 
 # Add global binary directory to path
 ENV PATH $COMPOSER_HOME/vendor/bin:$PATH
@@ -49,7 +49,7 @@ RUN php -r "readfile('https://getcomposer.org/installer');" > /tmp/composer-setu
   && php -r "if (hash('SHA384', file_get_contents('/tmp/composer-setup.php')) !== '${COMPOSER_INSTALLER_SHA384}') { unlink('/tmp/composer-setup.php'); echo 'Invalid installer' . PHP_EOL; exit(1); }"
 
 # Set up the volumes and working directory
-VOLUME ["/app", "/root/composer"]
+VOLUME ["/app", "/composer"]
 WORKDIR /app
 
 # Set up the command arguments
