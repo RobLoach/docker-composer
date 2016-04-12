@@ -1,4 +1,4 @@
-# Composer Docker Container
+# Composer Docker Container [![Build Status](https://travis-ci.org/RobLoach/docker-composer.svg?branch=master)](https://travis-ci.org/RobLoach/docker-composer) [![Docker Pulls](https://img.shields.io/docker/pulls/composer/composer.svg?maxAge=2592000)](https://hub.docker.com/r/composer/composer)
 
 [Docker](http://docker.com) container to install and run [Composer](http://getcomposer.org).
 
@@ -7,6 +7,8 @@
 * [Composer](http://getcomposer.org)
   * [`master`](https://github.com/composer/composer/blob/master/CHANGELOG.md): Latest snapshot
   * `latest`: Latest stable release
+  * `1`: Latest `1.*` stable release
+  * `1.0`: Latest `1.0.*` stable release
   * [`1.0.0`](https://github.com/composer/composer/blob/1.0.0/CHANGELOG.md)
   * [`1.0.0-beta2`](https://github.com/composer/composer/blob/1.0.0-beta2/CHANGELOG.md)
   * [`1.0.0-beta1`](https://github.com/composer/composer/blob/1.0.0-beta1/CHANGELOG.md)
@@ -14,7 +16,7 @@
   * [`1.0.0-alpha10`](https://github.com/composer/composer/blob/1.0.0-alpha10/CHANGELOG.md)
   * [`1.0.0-alpha9`](https://github.com/composer/composer/blob/1.0.0-alpha9/CHANGELOG.md)
   * [`1.0.0-alpha8`](https://github.com/composer/composer/blob/1.0.0-alpha8/CHANGELOG.md)
-* [PHP](http://php.net) [5.6](http://php.net/ChangeLog-5.php)
+* [PHP](http://php.net) [7](http://php.net/ChangeLog-7.php)
 
 ## Installation / Usage
 
@@ -80,6 +82,13 @@ themselves. To create libraries/packages please read the
     ```sh
     $ composer --version
     ```
+
+## Mountable Volumes
+
+Name | Description
+---- | -----------
+`/app` | The working directory for the application.
+`/composer` | The default [`COMPOSER_HOME`](https://getcomposer.org/doc/03-cli.md#composer-home) directory when running Composer.
 
 ## Installation from Source
 
