@@ -41,8 +41,9 @@ RUN echo "always_populate_raw_post_data=-1" > $PHP_INI_DIR/conf.d/always_populat
 # Environmental Variables
 ENV COMPOSER_HOME /composer
 
-# Add global binary directory to path
+# Add global binary directory to PATH and make sure to re-export it
 ENV PATH $COMPOSER_HOME/vendor/bin:$PATH
+RUN export PATH=$PATH:$COMPOSER_HOME/vendor/bin
 
 # Allow Composer to be run as root
 ENV COMPOSER_ALLOW_SUPERUSER 1
