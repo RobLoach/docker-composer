@@ -88,7 +88,6 @@ themselves. To create libraries/packages please read the
 Name | Description
 ---- | -----------
 `/app` | The working directory for the application.
-`/composer` | The default [`COMPOSER_HOME`](https://getcomposer.org/doc/03-cli.md#composer-home) directory when running Composer.
 
 ## Installation from Source
 
