@@ -1,5 +1,5 @@
 # Composer Docker Container
-FROM composer/composer:base
+FROM composer/composer:base-php5
 MAINTAINER Rob Loach <robloach@gmail.com>
 
 ENV COMPOSER_VERSION 1.0.0-beta1

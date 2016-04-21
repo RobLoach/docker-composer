@@ -16,19 +16,19 @@
   * [`1.0.0-alpha10`](https://github.com/composer/composer/blob/1.0.0-alpha10/CHANGELOG.md)
   * [`1.0.0-alpha9`](https://github.com/composer/composer/blob/1.0.0-alpha9/CHANGELOG.md)
   * [`1.0.0-alpha8`](https://github.com/composer/composer/blob/1.0.0-alpha8/CHANGELOG.md)
-* [PHP](http://php.net) [7](http://php.net/ChangeLog-7.php)
+* [PHP](http://php.net) [5](http://php.net/ChangeLog-5.php)
 
 ## Installation / Usage
 
 1. Install the `composer/composer` container:
 
     ``` sh
-    $ docker pull composer/composer
+    $ docker pull composer/composer:php5
     ```
 
   Alternatively, pull a specific version of `composer/composer`:
     ``` sh
-    $ docker pull composer/composer:1.0.0
+    $ docker pull composer/composer:1.0.0-php5
     ```
 
 2. Create a composer.json defining your dependencies. Note that this example is
@@ -47,11 +47,11 @@ themselves. To create libraries/packages please read the
 3. Run Composer through the Composer container:
 
     ``` sh
-    $ docker run --rm -v $(pwd):/app composer/composer install
+    $ docker run --rm -v $(pwd):/app composer/composer:php5 install
     ```
   Or run using a specific version of Composer:
     ``` sh
-    $ docker run --rm -v $(pwd):/app composer/composer:1.0.0 install
+    $ docker run --rm -v $(pwd):/app composer/composer:1.0.0-php5 install
     ```
   If working with packages installed via git ssh the local .ssh directory shall be mapped into the container:
     ```sh

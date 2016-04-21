@@ -1,6 +1,6 @@
 # Composer Docker Container
 # Base Dockerfile: composer/base
-FROM php:7-cli
+FROM php:5-cli
 MAINTAINER Rob Loach <robloach@gmail.com>
 
 # Packages
