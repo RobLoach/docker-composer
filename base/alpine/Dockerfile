@@ -8,7 +8,6 @@ RUN apk --update add \
     autoconf \
     build-base \
     curl \
-    gcc \
     git \
     subversion \
     freetype-dev \
