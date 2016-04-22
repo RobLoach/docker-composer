@@ -35,11 +35,6 @@ RUN echo "memory_limit=-1" > $PHP_INI_DIR/conf.d/memory-limit.ini
 # Time Zone
 RUN echo "date.timezone=${PHP_TIMEZONE:-UTC}" > $PHP_INI_DIR/conf.d/date_timezone.ini
 
-# Disable Populating Raw POST Data
-# Not needed when moving to PHP 7.
-# http://php.net/manual/en/ini.core.php#ini.always-populate-raw-post-data
-RUN echo "always_populate_raw_post_data=-1" > $PHP_INI_DIR/conf.d/always_populate_raw_post_data.ini
-
 # Register the COMPOSER_HOME environment variable
 ENV COMPOSER_HOME /composer
 
