@@ -14,10 +14,11 @@ build:
 	docker build -t composer/composer:1.0.0-alpha9 1.0.0-alpha9
 	docker build -t composer/composer:1.0.0-alpha8 1.0.0-alpha8
 	docker build -t composer/composer:base-alpine base/alpine
-	docker build -t composer/composer:alpine 1.0.0/alpine
+	docker build -t composer/composer:alpine 1.0.1/alpine
 	docker build -t composer/composer:1-alpine 1.0.0/alpine
 	docker build -t composer/composer:1.0-alpine 1.0.0/alpine
 	docker build -t composer/composer:1.0.0-alpine 1.0.0/alpine
+	docker build -t composer/composer:1.0.1-alpine 1.0.1/alpine
 	docker build -t composer/composer:master-alpine master/alpine
 
 version:
@@ -49,6 +50,8 @@ version:
 	@docker run composer/composer:master-alpine --version --no-ansi
 	@echo -n "composer/composer:1.0.0-alpine\t\t"
 	@docker run composer/composer:1.0.0-alpine --version --no-ansi
+	@echo -n "composer/composer:1.0.1-alpine\t\t"
+	@docker run composer/composer:1.0.1-alpine --version --no-ansi
 
 test:
 	@make version
