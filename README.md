@@ -1,23 +1,21 @@
-# Composer Docker Container [![Build Status](https://travis-ci.org/RobLoach/docker-composer.svg?branch=master)](https://travis-ci.org/RobLoach/docker-composer) [![Docker Pulls](https://img.shields.io/docker/pulls/composer/composer.svg?maxAge=2592000)](https://hub.docker.com/r/composer/composer)
+# Supported tags and respective `Dockerfile` links
 
-[Docker](http://docker.com) container to install and run [Composer](http://getcomposer.org).
+- `1.0.0`
+- `1.0.0-alpine`
+- `1.0.0-php5-alpine`
+- `1.0.1`, `1.0`, `1`
+- `1.0.1-alpine`, `1.0-alpine`, `1-alpine`
+- `1.0.1-php5-alpine`, `1.0-php5-alpine`, `1-php5-alpine`
 
-## Features
+# What is Composer?
 
-* [Composer](http://getcomposer.org)
-  * [`master`](https://github.com/composer/composer/blob/master/CHANGELOG.md): Latest snapshot
-  * `latest`: Latest stable release
-  * `1`: Latest `1.*` stable release
-  * `1.0`: Latest `1.0.*` stable release
-  * [`1.0.1`](https://github.com/composer/composer/blob/1.0.1/CHANGELOG.md)
-  * [`1.0.0`](https://github.com/composer/composer/blob/1.0.0/CHANGELOG.md)
-  * [`1.0.0-beta2`](https://github.com/composer/composer/blob/1.0.0-beta2/CHANGELOG.md)
-  * [`1.0.0-beta1`](https://github.com/composer/composer/blob/1.0.0-beta1/CHANGELOG.md)
-  * [`1.0.0-alpha11`](https://github.com/composer/composer/blob/1.0.0-alpha11/CHANGELOG.md)
-  * [`1.0.0-alpha10`](https://github.com/composer/composer/blob/1.0.0-alpha10/CHANGELOG.md)
-  * [`1.0.0-alpha9`](https://github.com/composer/composer/blob/1.0.0-alpha9/CHANGELOG.md)
-  * [`1.0.0-alpha8`](https://github.com/composer/composer/blob/1.0.0-alpha8/CHANGELOG.md)
-* [PHP](http://php.net) [7](http://php.net/ChangeLog-7.php)
+Composer is a tool for dependency management in PHP. It allows you to declare the libraries your project depends on and it will manage (install/update) them for you.
+
+> [wikipedia.org/wiki/Composer (software)](https://en.wikipedia.org/wiki/Composer_(software))
+
+![Composer Logo](logo.png "Composer")
+
+# How to use this image.
 
 ## Installation / Usage
 
@@ -84,43 +82,16 @@ themselves. To create libraries/packages please read the
     $ composer --version
     ```
 
-## Mountable Volumes
+# Image Variants
 
-Name | Description
----- | -----------
-`/app` | The working directory for the application.
+## `composer/composer:<version>
 
-## Installation from Source
+This is the defacto image. If you are unsure about what your needs are, you probably want to use this one. It is designed to be used both as a throw away container (mount your source code and start the container to start your app), as well as the base to build other images off of.
 
-To run, test and develop the Composer Dockerfile itself, you must use the
-source directly:
+## `composer/composer:php5`
 
-1. Download the source:
+This is made to run Composer through PHP 5, rather then the default of PHP 7.
 
-    ``` sh
-    $ git clone https://github.com/RobLoach/composer-docker.git
-    ```
+## `composer/composer:alpine`
 
-2. Switch to the `composer-docker` directory:
-
-    ``` sh
-    $ cd composer-docker
-    ```
-
-3. Build the base container (in case of adaptions on the composer base image only)
-
-    ``` sh
-    $ docker build -t composer/composer:base base
-    ```
-
-4. Build the container, using Composer's latest `master` release:
-
-    ``` sh
-    $ docker build -t composer/composer:latest master
-    ```
-
-5. Test running Composer through the container:
-
-    ``` sh
-    $ docker run composer/composer help
-    ```
+This image is based on the popular [Alpine Linux project](http://alpinelinux.org/), available in [the alpine official image](https://hub.docker.com/_/alpine). Alpine Linux is much smaller than most distribution base images (~5MB), and thus leads to much slimmer images in general.
