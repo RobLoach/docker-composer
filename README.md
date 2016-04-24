@@ -9,6 +9,7 @@
   * `latest`: Latest stable release
   * `1`: Latest `1.*` stable release
   * `1.0`: Latest `1.0.*` stable release
+  * [`1.0.1`](https://github.com/composer/composer/blob/1.0.1/CHANGELOG.md)
   * [`1.0.0`](https://github.com/composer/composer/blob/1.0.0/CHANGELOG.md)
   * [`1.0.0-beta2`](https://github.com/composer/composer/blob/1.0.0-beta2/CHANGELOG.md)
   * [`1.0.0-beta1`](https://github.com/composer/composer/blob/1.0.0-beta1/CHANGELOG.md)
@@ -28,7 +29,7 @@
 
   Alternatively, pull a specific version of `composer/composer`:
     ``` sh
-    $ docker pull composer/composer:1.0.0-php5
+    $ docker pull composer/composer:1.0.1-php5
     ```
 
 2. Create a composer.json defining your dependencies. Note that this example is
@@ -51,7 +52,7 @@ themselves. To create libraries/packages please read the
     ```
   Or run using a specific version of Composer:
     ``` sh
-    $ docker run --rm -v $(pwd):/app composer/composer:1.0.0-php5 install
+    $ docker run --rm -v $(pwd):/app composer/composer:1.0.1-php5 install
     ```
   If working with packages installed via git ssh the local .ssh directory shall be mapped into the container:
     ```sh
