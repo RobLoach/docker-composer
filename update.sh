@@ -39,7 +39,13 @@ function write_files {
 tags="$(git ls-remote --tags https://github.com/composer/composer.git | cut -d/ -f3 | cut -d^ -f1 | cut -dv -f2 | sort -rV)"
 
 for version in "${versions[@]}"; do
-	full_version="$(echo "$tags" | grep "^$version" | tail -n 1)"
+	possibleVersions="$(echo "$tags" | grep "^$version" )"
+	if releaseVersions="$(echo "$possibleVersions" | grep -vEm1 '\-alpha|\-beta')"; then
+		full_version="$releaseVersions"
+	else
+		full_version="$(echo "$possibleVersions" | head -n1)"
+	fi
+
 	if [[ -z $full_version ]]; then
 		echo "Cannot find version: $version"
 		exit 1
