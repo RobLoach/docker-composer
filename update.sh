@@ -31,7 +31,7 @@ function write_files {
 	mkdir -p "$target_dir"
 	cp $template "$target_dir/Dockerfile"
 	if [[ -f docker-entrypoint.sh ]]; then
-		cp -r docker-entrypoint.sh scripts "$target_dir"
+		cp -r docker-entrypoint.sh "$target_dir"
 	fi
 	sed -r -i -e 's/^(ENV COMPOSER_VERSION) .*/\1 '"$full_version"'/' "$target_dir/Dockerfile"
 }
@@ -39,11 +39,11 @@ function write_files {
 tags="$(git ls-remote --tags https://github.com/composer/composer.git | cut -d/ -f3 | cut -d^ -f1 | cut -dv -f2 | sort -rV)"
 
 for version in "${versions[@]}"; do
-	possibleVersions="$(echo "$tags" | grep "^$version" )"
-	if releaseVersions="$(echo "$possibleVersions" | grep -vEm1 '\-alpha|\-beta')"; then
-		full_version="$releaseVersions"
+	possible_versions="$(echo "$tags" | grep "^$version" )"
+	if release_versions="$(echo "$possible_versions" | grep -vEm1 '\-alpha|\-beta')"; then
+		full_version="$release_versions"
 	else
-		full_version="$(echo "$possibleVersions" | head -n1)"
+		full_version="$(echo "$possible_versions" | head -n1)"
 	fi
 
 	if [[ -z $full_version ]]; then
