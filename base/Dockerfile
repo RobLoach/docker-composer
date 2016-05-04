@@ -18,6 +18,7 @@ RUN apt-get update && \
     git \
     subversion \
     unzip \
+    wget \
   && rm -r /var/lib/apt/lists/*
 
 # PHP Extensions
