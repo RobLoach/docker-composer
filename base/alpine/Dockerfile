@@ -20,7 +20,8 @@ RUN apk --update add \
     openldap-dev \
     make \
     php-pear \
-    unzip && \
+    unzip \
+    wget && \
     docker-php-ext-install mcrypt zip bz2 mbstring xsl && \
     docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \
     docker-php-ext-install gd && \
@@ -45,7 +46,7 @@ ENV PATH /composer/vendor/bin:$PATH
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
 # Setup the Composer installer
-ENV COMPOSER_INSTALLER_SHA384 "7228c001f88bee97506740ef0888240bd8a760b046ee16db8f4095c0d8d525f2367663f22a46b48d072c816e7fe19959"
+ENV COMPOSER_INSTALLER_SHA384 "a52be7b8724e47499b039d53415953cc3d5b459b9d9c0308301f867921c19efc623b81dfef8fc2be194a5cf56945d223"
 RUN php -r "readfile('https://getcomposer.org/installer');" > /tmp/composer-setup.php \
   && php -r "if (hash('SHA384', file_get_contents('/tmp/composer-setup.php')) !== '${COMPOSER_INSTALLER_SHA384}') { unlink('/tmp/composer-setup.php'); echo 'Invalid installer' . PHP_EOL; exit(1); }"
 
