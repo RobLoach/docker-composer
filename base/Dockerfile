@@ -49,7 +49,7 @@ ENV PATH /composer/vendor/bin:$PATH
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
 # Setup the Composer installer
-ENV COMPOSER_INSTALLER_SHA384 "a52be7b8724e47499b039d53415953cc3d5b459b9d9c0308301f867921c19efc623b81dfef8fc2be194a5cf56945d223"
+ENV COMPOSER_INSTALLER_SHA384 "92102166af5abdb03f49ce52a40591073a7b859a86e8ff13338cf7db58a19f7844fbc0bb79b2773bf30791e935dbd938"
 RUN php -r "readfile('https://getcomposer.org/installer');" > /tmp/composer-setup.php \
   && php -r "if (hash('SHA384', file_get_contents('/tmp/composer-setup.php')) !== '${COMPOSER_INSTALLER_SHA384}') { unlink('/tmp/composer-setup.php'); echo 'Invalid installer' . PHP_EOL; exit(1); }"
 
