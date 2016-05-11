@@ -2,8 +2,8 @@
 #
 # Usage: ./update.sh x.y.z
 #
-# This script runs to create a Dockerfile for a new Drush version.
-# If you specify a partial version, like '8' or '8.0', it will determine the most recent sub version like 8.0.1.
+# This script runs to create a Dockerfile for a new Composer version.
+# If you specify a partial version, like '1' or '1.0', it will determine the most recent sub version like 1.0.1.
 set -eo pipefail
 
 cd "$(dirname "$(readlink -f "$BASH_SOURCE")")"
