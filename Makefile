@@ -6,6 +6,7 @@ build:
 	docker build -t composer/composer:1.0.1 1.0.1
 	docker build -t composer/composer:latest 1.0.1
 	docker build -t composer/composer:1.0.0 1.0.0
+	docker build -t composer/composer:1.1.0 1.1.0
 	docker build -t composer/composer:master master
 	docker build -t composer/composer:1.0.0-beta2 1.0.0-beta2
 	docker build -t composer/composer:1.0.0-beta1 1.0.0-beta1
@@ -32,6 +33,8 @@ version:
 	@docker run composer/composer:1.0.1 --version --no-ansi
 	@echo -n "composer/composer:1.0.0\t\t"
 	@docker run composer/composer:1.0.0 --version --no-ansi
+	@echo -n "composer/composer:1.1.0\t\t"
+	@docker run composer/composer:1.1.0 --version --no-ansi
 	@echo -n "composer/composer:1.0.0-beta2\t"
 	@docker run composer/composer:1.0.0-beta2 --version --no-ansi
 	@echo -n "composer/composer:1.0.0-beta1\t"
