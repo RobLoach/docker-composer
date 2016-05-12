@@ -1,40 +1,43 @@
 # Composer Docker Container
-# Base Dockerfile: composer/base-alpine
-FROM php:7.0-alpine
+# Base Dockerfile: composer/base
+FROM php:5-cli
 MAINTAINER Rob Loach <robloach@gmail.com>
 
 # Packages
-RUN apk --update add \
-    autoconf \
-    build-base \
+RUN apt-get update && \
+  DEBIAN_FRONTEND=noninteractive apt-get install -y \
+    libfreetype6-dev \
+    libjpeg62-turbo-dev \
+    libmcrypt-dev \
+    libpng12-dev \
+    libbz2-dev \
+    libxslt-dev \
+    libldap2-dev \
+    php-pear \
     curl \
     git \
     subversion \
-    freetype-dev \
-    libjpeg-turbo-dev \
-    libmcrypt-dev \
-    libpng-dev \
-    libbz2 \
-    libstdc++ \
-    libxslt-dev \
-    openldap-dev \
-    make \
-    php-pear \
     unzip \
-    wget && \
-    docker-php-ext-install mcrypt zip bz2 mbstring xsl && \
-    docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \
-    docker-php-ext-install gd && \
-    docker-php-ext-configure ldap --with-libdir=lib/ && \
-    docker-php-ext-install ldap && \
-    apk del build-base && \
-    rm -rf /var/cache/apk/*
+    wget \
+  && rm -r /var/lib/apt/lists/*
+
+# PHP Extensions
+RUN docker-php-ext-install mcrypt zip bz2 mbstring xsl \
+  && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+  && docker-php-ext-install gd \
+  && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ \
+  && docker-php-ext-install ldap
 
 # Memory Limit
 RUN echo "memory_limit=-1" > $PHP_INI_DIR/conf.d/memory-limit.ini
 
 # Time Zone
 RUN echo "date.timezone=${PHP_TIMEZONE:-UTC}" > $PHP_INI_DIR/conf.d/date_timezone.ini
+
+# Disable Populating Raw POST Data
+# Not needed when moving to PHP 7.
+# http://php.net/manual/en/ini.core.php#ini.always-populate-raw-post-data
+RUN echo "always_populate_raw_post_data=-1" > $PHP_INI_DIR/conf.d/always_populate_raw_post_data.ini
 
 # Register the COMPOSER_HOME environment variable
 ENV COMPOSER_HOME /composer

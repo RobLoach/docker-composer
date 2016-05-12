@@ -1,6 +1,6 @@
 # Composer Docker Container
-# Base Dockerfile: composer/base-alpine
-FROM php:7.0-alpine
+# Base Dockerfile: composer/base-php5-alpine
+FROM php:5-alpine
 MAINTAINER Rob Loach <robloach@gmail.com>
 
 # Packages
