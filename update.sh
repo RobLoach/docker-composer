@@ -19,7 +19,7 @@ function writeFiles {
 	local fullVersion=$1
 	local variant=$2
 
-	shortVersion=$(echo $fullVersion | sed -r -e 's/^([0-9]+.[0-9]+.[0-9]+)/\1/')
+	shortVersion=$(echo $fullVersion | sed -r -e 's/^([0-9]+.[0-9]+).*/\1/')
 	if [[ -z $variant ]]; then
 		targetDir="$shortVersion"
 		template=Dockerfile.template
