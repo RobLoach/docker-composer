@@ -1,5 +1,8 @@
 build:
 	docker build -t composer/composer:base base
+	docker build -t composer/composer:base-alpine base/alpine
+	docker build -t composer/composer:base-php5 base/php5
+	docker build -t composer/composer:base-php5-alpine base/php5-alpine
 	docker build -t composer/composer 1.0.1
 	docker build -t composer/composer:1 1.0.1
 	docker build -t composer/composer:1.0 1.0.1
@@ -7,7 +10,6 @@ build:
 	docker build -t composer/composer:latest 1.0.1
 	docker build -t composer/composer:1.0.0 1.0.0
 	docker build -t composer/composer:master master
-	docker build -t composer/composer:base-alpine base/alpine
 	docker build -t composer/composer:alpine 1.0.1/alpine
 	docker build -t composer/composer:1-alpine 1.0.0/alpine
 	docker build -t composer/composer:1.0-alpine 1.0.0/alpine
