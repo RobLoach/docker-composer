@@ -2,11 +2,14 @@
 
 - `1.0`
 - `1.0-alpine`
+- `1.0-php5`
 - `1.0-php5-alpine`
-- `1.1`, `1`
-- `1.1-alpine`, `1-alpine`
-- `1.1-php5-alpine`, `1-php5-alpine`
+- `1.1`, `1`, `latest`
+- `1.1-php5`, `1-php5`, `php5`
+- `1.1-alpine`, `1-alpine`, `alpine`
+- `1.1-php5-alpine`, `1-php5-alpine`, `php5-alpine`
 - `master`
+- `master-php5`
 - `master-alpine`
 - `master-php5-alpine`
 
@@ -30,7 +33,7 @@ Composer is a tool for dependency management in PHP. It allows you to declare th
 
   Alternatively, pull a specific version of `composer/composer`:
     ``` sh
-    $ docker pull composer/composer:1.0.1
+    $ docker pull composer/composer:1.1
     ```
 
 2. Create a composer.json defining your dependencies. Note that this example is
@@ -53,7 +56,7 @@ themselves. To create libraries/packages please read the
     ```
   Or run using a specific version of Composer:
     ``` sh
-    $ docker run --rm -v $(pwd):/app composer/composer:1.0.1 install
+    $ docker run --rm -v $(pwd):/app composer/composer:1.1 install
     ```
   If working with packages installed via git ssh the local .ssh directory shall be mapped into the container:
     ```sh
@@ -98,3 +101,7 @@ This is made to run Composer through PHP 5, rather then the default of PHP 7.
 ## `composer/composer:alpine`
 
 This image is based on the popular [Alpine Linux project](http://alpinelinux.org/), available in [the alpine official image](https://hub.docker.com/_/alpine). Alpine Linux is much smaller than most distribution base images (~5MB), and thus leads to much slimmer images in general.
+
+## `composer/composer:php5-alpine`
+
+This is made to run Composer through PHP 5, rather then the default of PHP 7, through the Alpine container.
