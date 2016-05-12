@@ -1,14 +1,11 @@
 # Supported tags and respective `Dockerfile` links
 
-- `1.0.0`
-- `1.0.0-alpine`
-- `1.0.0-php5-alpine`
-- `1.0.1`, `1.0`
-- `1.0.1-alpine`, `1.0-alpine`, `1-alpine`
-- `1.0.1-php5-alpine`, `1.0-php5-alpine`, `1-php5-alpine`
-- `1.1.0`, `1.1`, `1`
-- `1.1.0-alpine`, `1.1-alpine`
-- `1.1.0-php5-alpine`, `1.1-php5-alpine`
+- `1.0`
+- `1.0-alpine`
+- `1.0-php5-alpine`
+- `1.1`, `1`
+- `1.1-alpine`, `1-alpine`
+- `1.1-php5-alpine`, `1-php5-alpine`
 - `master`
 - `master-alpine`
 - `master-php5-alpine`
