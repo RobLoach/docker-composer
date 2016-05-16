@@ -19,7 +19,7 @@ Composer is a tool for dependency management in PHP. It allows you to declare th
 
 > [wikipedia.org/wiki/Composer (software)](https://en.wikipedia.org/wiki/Composer_(software))
 
-![Composer Logo](logo.png "Composer")
+![Composer Logo](https://getcomposer.org/img/logo-composer-transparent.png "Composer")
 
 # How to use this image.
 
