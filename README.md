@@ -90,7 +90,7 @@ themselves. To create libraries/packages please read the
 
 # Image Variants
 
-## `composer/composer:<version>
+## `composer/composer:<version>`
 
 This is the defacto image. If you are unsure about what your needs are, you probably want to use this one. It is designed to be used both as a throw away container (mount your source code and start the container to start your app), as well as the base to build other images off of.
 
