@@ -18,8 +18,8 @@ RUN apk --update add \
     libstdc++ \
     libxslt-dev \
     openldap-dev \
+    php7-pear \
     make \
-    php-pear \
     unzip \
     wget && \
     docker-php-ext-install mcrypt zip bz2 mbstring pcntl xsl && \
