@@ -18,6 +18,7 @@ RUN apk --update add \
     libstdc++ \
     libxslt-dev \
     openldap-dev \
+    php7-pear \
     make \
     unzip \
     wget && \
