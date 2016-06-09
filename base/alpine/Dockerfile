@@ -19,7 +19,6 @@ RUN apk --update add \
     libxslt-dev \
     openldap-dev \
     make \
-    php-pear \
     unzip \
     wget && \
     docker-php-ext-install mcrypt zip bz2 mbstring pcntl xsl && \
