@@ -19,7 +19,6 @@ RUN apk --update add \
     libxslt-dev \
     openldap-dev \
     make \
-    php-pear \
     unzip \
     wget && \
     docker-php-ext-install mcrypt zip bz2 mbstring pcntl xsl && \
@@ -28,6 +27,11 @@ RUN apk --update add \
     docker-php-ext-configure ldap --with-libdir=lib/ && \
     docker-php-ext-install ldap && \
     apk del build-base && \
+    rm -rf /var/cache/apk/*
+
+# PEAR tmp fix
+RUN echo "@testing http://dl-4.alpinelinux.org/alpine/edge/testing/" >> /etc/apk/repositories && \
+    apk add --update php7-pear@testing && \
     rm -rf /var/cache/apk/*
 
 # Memory Limit
