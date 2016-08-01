@@ -62,7 +62,7 @@ build-1.2: build-base
 	docker build -t composer/composer:1.2-php5 1.2/php5
 	docker build -t composer/composer:1.2-php5-alpine 1.2/php5-alpine	
 
-test-1.1:
+test-1.2:
 	@echo -n "1.2\t\t\t"
 	@docker run composer/composer:1.2 --version --no-ansi
 	@echo -n "1.2-alpine\t\t"
