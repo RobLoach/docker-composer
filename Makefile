@@ -1,6 +1,6 @@
-build: build-1.0 build-1.1 build-master
+build: build-1.0 build-1.1 build-1.2 build-master
 
-test: build test-1.0 test-1.1 test-master
+test: build test-1.0 test-1.1 test-1.2 test-master
 
 build-base:
 	docker build -t composer/composer:base base
@@ -55,3 +55,19 @@ test-1.1:
 	@docker run composer/composer:1.1-php5 --version --no-ansi
 	@echo -n "1.1-php5-alpine\t\t"
 	@docker run composer/composer:1.1-php5-alpine --version --no-ansi
+
+build-1.2: build-base
+	docker build -t composer/composer:1.2 1.2
+	docker build -t composer/composer:1.2-alpine 1.2/alpine
+	docker build -t composer/composer:1.2-php5 1.2/php5
+	docker build -t composer/composer:1.2-php5-alpine 1.2/php5-alpine	
+
+test-1.2:
+	@echo -n "1.2\t\t\t"
+	@docker run composer/composer:1.2 --version --no-ansi
+	@echo -n "1.2-alpine\t\t"
+	@docker run composer/composer:1.2-alpine --version --no-ansi
+	@echo -n "1.2-php5\t\t"
+	@docker run composer/composer:1.2-php5 --version --no-ansi
+	@echo -n "1.2-php5-alpine\t\t"
+	@docker run composer/composer:1.2-php5-alpine --version --no-ansi
