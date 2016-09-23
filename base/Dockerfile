@@ -13,6 +13,7 @@ RUN apt-get update && \
     libbz2-dev \
     libxslt-dev \
     libldap2-dev \
+    libgmp-dev \
     php-pear \
     curl \
     git \
@@ -25,6 +26,9 @@ RUN apt-get update && \
 RUN docker-php-ext-install bcmath mcrypt zip bz2 mbstring pcntl xsl \
   && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
   && docker-php-ext-install gd \
+  && ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h \
+  && docker-php-ext-configure gmp --with-gmp=/usr/include/x86_64-linux-gnu \
+  && docker-php-ext-install gmp \
   && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ \
   && docker-php-ext-install ldap
 
