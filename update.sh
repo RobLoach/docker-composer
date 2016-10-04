@@ -1,9 +1,5 @@
 #!/bin/bash
-#
-# Usage: ./update.sh x.y.z
-#
-# This script runs to create a Dockerfile for a new Composer version.
-# If you specify a partial version, like '1' or '1.0', it will determine the most recent sub version like 1.0.1.
+
 set -eo pipefail
 
 cd "$(dirname "$(readlink -f "$BASH_SOURCE")")"
@@ -15,47 +11,48 @@ if [ ${#versions[@]} -eq 0 ]; then
 fi
 versions=( "${versions[@]%/}" )
 
-function writeFiles {
-	local fullVersion=$1
+function copyTemplates {
+	local tag=$1
+	local shortTag=$(echo $tag | sed -r -e 's/^([0-9]+.[0-9]+).*/\1/')
 	local variant=$2
 
-	shortVersion=$(echo $fullVersion | sed -r -e 's/^([0-9]+.[0-9]+).*/\1/')
 	if [[ -z $variant ]]; then
-		targetDir="$shortVersion"
-		template=Dockerfile.template
+		targetDir="$shortTag"
+		template=templates/Dockerfile
 	else
-		targetDir="$shortVersion/$variant"
-		template=Dockerfile-$variant.template
+		targetDir="$shortTag/$variant"
+		template=templates/$variant/Dockerfile
 	fi
+
+	targetFile="$targetDir/Dockerfile"
 
 	mkdir -p "$targetDir"
-	cp $template "$targetDir/Dockerfile"
-	if [[ -f docker-entrypoint.sh ]]; then
-		cp -r docker-entrypoint.sh "$targetDir"
-	fi
-	sed -r -i -e 's/^(ENV COMPOSER_VERSION) .*/\1 '"$fullVersion"'/' "$targetDir/Dockerfile"
+	cp "$template" "$targetFile"
+
+	sed -ri 's/%%COMPOSER_VERSION%%/'"$tag"'/' "$targetFile"
 }
 
-tags="$(git ls-remote --tags https://github.com/composer/composer.git | cut -d/ -f3 | cut -d^ -f1 | cut -dv -f2 | sort -rV)"
+tags="$(git ls-remote --tags --refs https://github.com/composer/composer | cut -d/ -f3 | sort -rV)"
 
 for version in "${versions[@]}"; do
-	possibleVersions="$(echo "$tags" | grep "^$version" )"
-	if releaseVersions="$(echo "$possibleVersions" | grep -ivEm1 'milestone|-alpha|-beta|-rc')"; then
-		fullVersion="$releaseVersions"
+    matches="$(echo "$tags" | grep "^$version" )"
+
+	if releases="$(echo "$matches" | grep -ivEm1 'milestone|-alpha|-beta|-rc')"; then
+		tag="$releases"
 	else
-		fullVersion="$(echo "$possibleVersions" | head -n1)"
+		tag="$(echo "$matches" | head -n1)"
 	fi
 
-	if [[ -z $fullVersion ]]; then
-		echo "Cannot find version: $version"
+	if [[ -z $tag ]]; then
+		echo "Cannot find tag matching version: $version"
 		exit 1
 	fi
 
-	(
-		set -x
-		writeFiles $fullVersion
-		writeFiles $fullVersion 'alpine'
-		writeFiles $fullVersion 'php5'
-		writeFiles $fullVersion 'php5-alpine'
-	)
+	# base for given tag
+	copyTemplates "$tag"
+
+	# variants for given tag
+	for target in alpine php5 php5/alpine; do
+		copyTemplates "$tag" "$target"
+	done
 done
