@@ -75,7 +75,7 @@ themselves. To create libraries/packages please read the
     #!/bin/sh
     export PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin
     echo "Current working directory: '"$(pwd)"'"
-    docker run --rm -v $(pwd):/app -v ~/.ssh:/root/.ssh composer/composer $@
+    docker run --rm -v $(pwd):/app -v ~/.ssh:/root/.ssh -v ~/.composer-docker:/composer composer/composer $@
     ```
 
   Once the script has been made, it must be set as executable
