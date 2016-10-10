@@ -1,11 +1,31 @@
-# Composer Docker Container
-FROM composer/composer:base-alpine
-MAINTAINER Rob Loach <robloach@gmail.com>
+FROM php:7-alpine
 
-ENV COMPOSER_VERSION master
+RUN apk --no-cache add curl git subversion openssh openssl mercurial tini
 
-# Install Composer
-RUN php /tmp/composer-setup.php --no-ansi --install-dir=/usr/local/bin --filename=composer --snapshot && rm -rf /tmp/composer-setup.php
+RUN echo "memory_limit=-1" > $PHP_INI_DIR/conf.d/memory-limit.ini \
+ && echo "date.timezone=${PHP_TIMEZONE:-UTC}" > $PHP_INI_DIR/conf.d/date_timezone.ini
 
-# Display version information
-RUN composer --version
+ENV COMPOSER_HOME /composer
+ENV PATH /composer/vendor/bin:$PATH
+ENV COMPOSER_ALLOW_SUPERUSER 1
+RUN curl --silent --location --output /tmp/composer-setup.php https://getcomposer.org/installer \
+ && curl --silent --location --output /tmp/composer-setup.sig https://composer.github.io/installer.sig \
+ && php -r " \
+    \$hash = hash('SHA384', file_get_contents('/tmp/composer-setup.php')); \
+    \$signature = trim(file_get_contents('/tmp/composer-setup.sig')); \
+    if (!hash_equals(\$signature, \$hash)) { \
+        unlink('/tmp/composer-setup.php'); \
+        echo 'Integrity check failed, installer is either corrupt or worse.' . PHP_EOL; \
+        exit(1); \
+    }" \
+ && php /tmp/composer-setup.php --no-ansi --install-dir=/usr/bin --filename=composer --snapshot \
+ && rm /tmp/composer-setup.php \
+ && composer --ansi --version --no-interaction
+
+WORKDIR /app
+
+VOLUME /composer
+
+CMD ["--ansi", "--version"]
+
+ENTRYPOINT ["/sbin/tini", "--", "/usr/bin/composer"]

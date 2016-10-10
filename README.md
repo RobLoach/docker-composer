@@ -1,107 +1,113 @@
-# Supported tags and respective `Dockerfile` links
+# Supported tags and their respective `Dockerfile` links
 
-- `1.0`
-- `1.0-alpine`
-- `1.0-php5`
-- `1.0-php5-alpine`
-- `1.1`, `1`, `latest`
-- `1.1-php5`, `1-php5`, `php5`
-- `1.1-alpine`, `1-alpine`, `alpine`
-- `1.1-php5-alpine`, `1-php5-alpine`, `php5-alpine`
-- `master`
-- `master-php5`
-- `master-alpine`
-- `master-php5-alpine`
+- `1.2`, `1`, `latest` ([1.2/Dockerfile][])
+- `1.2-alpine`, `1-alpine`, `alpine` ([1.2-alpine/Dockerfile][])
+- `1.2-php5`, `1-php5`, `php5` ([1.2-php5/Dockerfile][])
+- `1.2-php5-alpine`, `1-php5-alpine`, `php5-alpine` ([1.2-php5-alpine/Dockerfile][])
+- `master` ([master/Dockerfile][])
+- `master-alpine` ([master-alpine/Dockerfile][])
+- `master-php5` ([master-php5/Dockerfile][])
+- `master-php5-alpine` ([master-php5-alpine/Dockerfile][])
+
 
 # What is Composer?
 
-Composer is a tool for dependency management in PHP. It allows you to declare the libraries your project depends on and it will manage (install/update) them for you.
+[Composer][] is a tool for dependency management in PHP. It allows you to
+declare the libraries your project depends on and it will manage (install /
+update) them for you.
 
-> [wikipedia.org/wiki/Composer (software)](https://en.wikipedia.org/wiki/Composer_(software))
 
-![Composer Logo](https://getcomposer.org/img/logo-composer-transparent.png "Composer")
+## Installing
 
-# How to use this image.
+Pull the `composer/composer` image from the hub repository:
 
-## Installation / Usage
+``` sh
+docker pull composer/composer
+```
 
-1. Install the `composer/composer` container:
+Alternatively, pull a specific variant of `composer/composer`:
+
+``` sh
+docker pull composer/composer:alpine
+```
+
+## Using
+
+Run the `composer/composer` image:
+
+``` sh
+docker run --rm -v $(pwd):/app composer/composer install
+```
+
+Alternatively, run a specific variant of `composer/composer`:
+
+``` sh
+docker run --rm -v $(pwd):/app composer/composer:alpine install
+```
+
+You can mount the Composer home directory from your host inside the Container
+to share caching and configuration files:
+
+``` sh
+docker run --rm -v $(pwd):/app -v $COMPOSER_HOME:/composer composer/composer install
+```
+
+## Suggestions
+
+We strive to deliver an image that is as lean as possible, aimed at running
+Composer only.
+
+Sometimes dependencies or [composer scripts] require the availability of certain
+PHP extensions. In this scenario, you have two options:
+
+* create your own image (by extending from one of the variants we offer),
+* pass the `--ignore-platform-reqs` and `--no-scripts` flags to `install` and
+    `update`.
 
     ``` sh
-    $ docker pull composer/composer
+    docker run --rm -v $(pwd):/app composer/composer install --no-scripts -ignore-platform-reqs
     ```
 
-  Alternatively, pull a specific version of `composer/composer`:
-    ``` sh
-    $ docker pull composer/composer:1.1
-    ```
+If you want to be able to just run `composer`, you can define the following
+function in your `~/.bashrc`, `~/.zshrc` or similar:
 
-2. Create a composer.json defining your dependencies. Note that this example is
-a short version for applications that are not meant to be published as packages
-themselves. To create libraries/packages please read the
-[documentation](http://getcomposer.org/doc/02-libraries.md).
-
-    ``` json
-    {
-        "require": {
-            "monolog/monolog": ">=1.0.0"
-        }
-    }
-    ```
-
-3. Run Composer through the Composer container:
-
-    ``` sh
-    $ docker run --rm -v $(pwd):/app composer/composer install
-    ```
-  Or run using a specific version of Composer:
-    ``` sh
-    $ docker run --rm -v $(pwd):/app composer/composer:1.1 install
-    ```
-  If working with packages installed via git ssh the local .ssh directory shall be mapped into the container:
-    ```sh
-    $ docker run --rm -v $(pwd):/app -v ~/.ssh:/root/.ssh composer/composer install
-    ```
-
-4. Add optional `composer` command to the host (tested on OS X El Capitan with docker-machine)
-
-  Create new composer file
-    ```sh
-    $ sudo vim /usr/local/bin/composer
-    ```
-
-  The contents of the file will look like this:
-    ```sh
-    #!/bin/sh
-    export PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin
-    echo "Current working directory: '"$(pwd)"'"
-    docker run --rm -v $(pwd):/app -v ~/.ssh:/root/.ssh composer/composer $@
-    ```
-
-  Once the script has been made, it must be set as executable
-    ```sh
-    $ sudo chmod +x /usr/local/bin/composer
-    ```
-
-  Now the `composer` command is available native on host:
-    ```sh
-    $ composer --version
-    ```
+``` sh
+function composer () {
+    docker run --rm -v $(pwd):/app composer/composer "$@"
+}
+```
 
 # Image Variants
 
-## `composer/composer:<version>`
+### `composer/composer:<version>`
 
-This is the defacto image. If you are unsure about what your needs are, you probably want to use this one. It is designed to be used both as a throw away container (mount your source code and start the container to start your app), as well as the base to build other images off of.
+This is the defacto image. If you are unsure about what your needs are, you
+probably want to use this one.
 
-## `composer/composer:php5`
+### `composer/composer:<version>-alpine`
 
-This is made to run Composer through PHP 5, rather then the default of PHP 7.
+This image is based on the popular [Alpine Linux project][], available in [the
+`alpine` official image][]. Alpine Linux is much smaller than most distribution
+base images (~5MB), and thus leads to much slimmer images in general.
 
-## `composer/composer:alpine`
+### `composer/composer:<version>-php5`
 
-This image is based on the popular [Alpine Linux project](http://alpinelinux.org/), available in [the alpine official image](https://hub.docker.com/_/alpine). Alpine Linux is much smaller than most distribution base images (~5MB), and thus leads to much slimmer images in general.
+This image runs the latest version of PHP 5 instead of PHP 7.
 
-## `composer/composer:php5-alpine`
+### `composer/composer:<version>-php5-alpine`
 
-This is made to run Composer through PHP 5, rather then the default of PHP 7, through the Alpine container.
+This image runs the latest version of PHP 5 instead of PHP 7.
+
+
+[Composer]: https://getcomposer.org
+[Alpine Linux project]: http://alpinelinux.org
+[the `alpine` official image]: https://hub.docker.com/_/alpine
+[composer scripts]: https://getcomposer.org/doc/articles/scripts.md
+[1.2/Dockerfile]: https://github.com/RobLoach/docker-composer/blob/master/1.2/Dockerfile
+[1.2-alpine/Dockerfile]: https://github.com/RobLoach/docker-composer/blob/master/1.2/alpine/Dockerfile
+[1.2-php5/Dockerfile]: https://github.com/RobLoach/docker-composer/blob/master/1.2/php5/Dockerfile
+[1.2-php5-alpine/Dockerfile]: https://github.com/RobLoach/docker-composer/blob/master/1.2/php5/alpine/Dockerfile
+[master/Dockerfile]: https://github.com/RobLoach/docker-composer/blob/master/master/Dockerfile
+[master-alpine/Dockerfile]: https://github.com/RobLoach/docker-composer/blob/master/master/alpine/Dockerfile
+[master-php5/Dockerfile]: https://github.com/RobLoach/docker-composer/blob/master/master/php5/Dockerfile
+[master-php5-alpine/Dockerfile]: https://github.com/RobLoach/docker-composer/blob/master/master/php5/alpine/Dockerfile
