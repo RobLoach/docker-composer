@@ -26,7 +26,9 @@ RUN docker-php-ext-install bcmath mcrypt zip bz2 mbstring pcntl xsl \
   && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
   && docker-php-ext-install gd \
   && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ \
-  && docker-php-ext-install ldap
+  && docker-php-ext-install ldap && \
+  # Install ZendOpcache opcode
+  pecl install zendopcache-7.0.4
 
 # Memory Limit
 RUN echo "memory_limit=-1" > $PHP_INI_DIR/conf.d/memory-limit.ini
