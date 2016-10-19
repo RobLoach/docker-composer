@@ -4,7 +4,7 @@ FROM php:7.0-alpine
 MAINTAINER Rob Loach <robloach@gmail.com>
 
 # Packages
-RUN apk --update add \
+RUN apk --update --no-cache add \
     autoconf \
     build-base \
     curl \
@@ -26,8 +26,7 @@ RUN apk --update add \
     docker-php-ext-install gd && \
     docker-php-ext-configure ldap --with-libdir=lib/ && \
     docker-php-ext-install ldap && \
-    apk del build-base && \
-    rm -rf /var/cache/apk/*
+    apk del build-base
 
 RUN echo "@edge http://dl-4.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
     apk add -U --no-cache php7-pear@edge
