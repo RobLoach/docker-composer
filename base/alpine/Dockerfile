@@ -29,10 +29,8 @@ RUN apk --update add \
     apk del build-base && \
     rm -rf /var/cache/apk/*
 
-# PEAR tmp fix
-RUN echo "@testing http://dl-4.alpinelinux.org/alpine/edge/testing/" >> /etc/apk/repositories && \
-    apk add --update php7-pear@testing && \
-    rm -rf /var/cache/apk/*
+RUN echo "@edge http://dl-4.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
+    apk add -U --no-cache php7-pear@edge
 
 # Memory Limit
 RUN echo "memory_limit=-1" > $PHP_INI_DIR/conf.d/memory-limit.ini
