@@ -1,26 +1,10 @@
-#
-# NOTE: THIS DOCKERFILE IS GENERATED VIA "update.sh"
-#
-# PLEASE DO NOT EDIT IT DIRECTLY.
-#
-FROM php:5-cli
+FROM php:5-alpine
 
-RUN apt-get update \
- && DEBIAN_FRONTEND=noninteractive apt-get install -y curl git subversion openssh-client openssl mercurial \
- && rm -r /var/lib/apt/lists/*
-
-ENV TINI_VERSION v0.10.0
-RUN curl --silent --location --output /sbin/tini https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini \
- && curl --silent --location --output /sbin/tini.asc https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini.asc \
- && gpg --keyserver ha.pool.sks-keyservers.net --recv-keys 595E85A6B1B4779EA4DAAEC70B588DFF0527A9B7 \
- && gpg --verify /sbin/tini.asc \
- && chmod +x /sbin/tini \
- && rm /sbin/tini.asc
+RUN apk --no-cache add curl git subversion openssh openssl mercurial tini
 
 RUN echo "memory_limit=-1" > $PHP_INI_DIR/conf.d/memory-limit.ini \
  && echo "date.timezone=${PHP_TIMEZONE:-UTC}" > $PHP_INI_DIR/conf.d/date_timezone.ini
 
-ENV COMPOSER_VERSION 1.2.1
 ENV COMPOSER_HOME /composer
 ENV PATH /composer/vendor/bin:$PATH
 ENV COMPOSER_ALLOW_SUPERUSER 1
@@ -34,7 +18,7 @@ RUN curl --silent --location --output /tmp/composer-setup.php https://getcompose
         echo 'Integrity check failed, installer is either corrupt or worse.' . PHP_EOL; \
         exit(1); \
     }" \
- && php /tmp/composer-setup.php --no-ansi --install-dir=/usr/bin --filename=composer --version=${COMPOSER_VERSION} \
+ && php /tmp/composer-setup.php --no-ansi --install-dir=/usr/bin --filename=composer --snapshot \
  && rm /tmp/composer-setup.php \
  && composer --ansi --version --no-interaction
 

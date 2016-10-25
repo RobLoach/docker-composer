@@ -1,11 +1,47 @@
-# Composer Docker Container
-FROM composer/composer:base
-MAINTAINER Rob Loach <robloach@gmail.com>
+#
+# NOTE: THIS DOCKERFILE IS GENERATED VIA "update.sh"
+#
+# PLEASE DO NOT EDIT IT DIRECTLY.
+#
+FROM php:7-cli
 
-ENV COMPOSER_VERSION 1.2.0
+RUN apt-get update \
+ && DEBIAN_FRONTEND=noninteractive apt-get install -y curl git subversion openssh-client openssl mercurial \
+ && rm -r /var/lib/apt/lists/*
 
-# Install Composer
-RUN php /tmp/composer-setup.php --no-ansi --install-dir=/usr/local/bin --filename=composer --version=${COMPOSER_VERSION} && rm -rf /tmp/composer-setup.php
+ENV TINI_VERSION v0.10.0
+RUN curl --silent --location --output /sbin/tini https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini \
+ && curl --silent --location --output /sbin/tini.asc https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini.asc \
+ && gpg --keyserver ha.pool.sks-keyservers.net --recv-keys 595E85A6B1B4779EA4DAAEC70B588DFF0527A9B7 \
+ && gpg --verify /sbin/tini.asc \
+ && chmod +x /sbin/tini \
+ && rm /sbin/tini.asc
 
-# Display version information.
-RUN composer --version
+RUN echo "memory_limit=-1" > $PHP_INI_DIR/conf.d/memory-limit.ini \
+ && echo "date.timezone=${PHP_TIMEZONE:-UTC}" > $PHP_INI_DIR/conf.d/date_timezone.ini
+
+ENV COMPOSER_VERSION 1.2.1
+ENV COMPOSER_HOME /composer
+ENV PATH /composer/vendor/bin:$PATH
+ENV COMPOSER_ALLOW_SUPERUSER 1
+RUN curl --silent --location --output /tmp/composer-setup.php https://getcomposer.org/installer \
+ && curl --silent --location --output /tmp/composer-setup.sig https://composer.github.io/installer.sig \
+ && php -r " \
+    \$hash = hash('SHA384', file_get_contents('/tmp/composer-setup.php')); \
+    \$signature = trim(file_get_contents('/tmp/composer-setup.sig')); \
+    if (!hash_equals(\$signature, \$hash)) { \
+        unlink('/tmp/composer-setup.php'); \
+        echo 'Integrity check failed, installer is either corrupt or worse.' . PHP_EOL; \
+        exit(1); \
+    }" \
+ && php /tmp/composer-setup.php --no-ansi --install-dir=/usr/bin --filename=composer --version=${COMPOSER_VERSION} \
+ && rm /tmp/composer-setup.php \
+ && composer --ansi --version --no-interaction
+
+WORKDIR /app
+
+VOLUME /composer
+
+CMD ["--ansi", "--version"]
+
+ENTRYPOINT ["/sbin/tini", "--", "/usr/bin/composer"]
