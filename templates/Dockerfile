@@ -3,7 +3,7 @@
 #
 # PLEASE DO NOT EDIT IT DIRECTLY.
 #
-FROM php:5-cli
+FROM php:7-cli
 
 RUN apt-get update \
  && DEBIAN_FRONTEND=noninteractive apt-get install -y curl git subversion openssh-client openssl mercurial \
@@ -20,7 +20,7 @@ RUN curl --silent --location --output /sbin/tini https://github.com/krallin/tini
 RUN echo "memory_limit=-1" > $PHP_INI_DIR/conf.d/memory-limit.ini \
  && echo "date.timezone=${PHP_TIMEZONE:-UTC}" > $PHP_INI_DIR/conf.d/date_timezone.ini
 
-ENV COMPOSER_VERSION 1.2.1
+ENV COMPOSER_VERSION %%COMPOSER_VERSION%%
 ENV COMPOSER_HOME /composer
 ENV PATH /composer/vendor/bin:$PATH
 ENV COMPOSER_ALLOW_SUPERUSER 1
