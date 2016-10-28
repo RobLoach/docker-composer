@@ -30,8 +30,8 @@ RUN apk --update add \
     rm -rf /var/cache/apk/*
 
 # PEAR tmp fix
-RUN echo "@testing http://dl-4.alpinelinux.org/alpine/edge/testing/" >> /etc/apk/repositories && \
-    apk add --update php7-pear@testing && \
+RUN echo "@community http://dl-4.alpinelinux.org/alpine/edge/community/" >> /etc/apk/repositories && \
+    apk add --update php7-pear@community && \
     rm -rf /var/cache/apk/*
 
 # Memory Limit
