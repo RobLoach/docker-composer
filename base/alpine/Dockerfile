@@ -18,6 +18,7 @@ RUN apk --update add \
     libstdc++ \
     libxslt-dev \
     openldap-dev \
+    openssh-client \
     make \
     unzip \
     wget && \
