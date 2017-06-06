@@ -11,7 +11,7 @@
 - `master`
 - `master-php5`
 - `master-alpine`
-- `master-php5-alpine`
+- `master-php5-alpine`, `master-php7.1.4-alpine`
 
 # What is Composer?
 
