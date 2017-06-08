@@ -1,0 +1,15 @@
+#!/bin/sh
+
+##
+# Make --ignore-platform-reqs default for
+# `install`, `remove` and `update`
+# but omit for other commands
+
+for arg; do
+    case "$arg" in
+        install|remove|update) set -- --ignore-platform-reqs "$@";;
+        *) :;;
+    esac
+done
+
+exec composer "$@"

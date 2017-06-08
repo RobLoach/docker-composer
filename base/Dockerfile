@@ -58,5 +58,6 @@ VOLUME ["/app"]
 WORKDIR /app
 
 # Set up the command arguments
+COPY wrapcomposer /usr/local/bin/wrapcomposer
 CMD ["-"]
-ENTRYPOINT ["composer", "--ansi"]
+ENTRYPOINT ["wrapcomposer", "--ansi"]
