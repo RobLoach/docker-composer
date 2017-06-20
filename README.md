@@ -1,3 +1,5 @@
+# Deprecated: Use the [`composer` Docker Container](https://hub.docker.com/r/library/composer/) instead.
+
 # Supported tags and respective `Dockerfile` links
 
 - `1.0`
