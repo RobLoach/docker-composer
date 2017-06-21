@@ -1,4 +1,6 @@
-# Deprecated: Use the [`composer` Docker Container](https://hub.docker.com/r/library/composer/) instead.
+# DEPRECATED
+
+This image has been deprecated and moved to the official [`composer` Docker Container](https://hub.docker.com/r/library/composer/). See [the source](https://github.com/composer/docker) for more information.
 
 # Supported tags and respective `Dockerfile` links
 
