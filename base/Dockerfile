@@ -57,6 +57,8 @@ RUN curl -o /tmp/composer-setup.php https://getcomposer.org/installer \
 VOLUME ["/app"]
 WORKDIR /app
 
+COPY docker-entrypoint.sh /usr/local/bin/
+
 # Set up the command arguments
-CMD ["-"]
-ENTRYPOINT ["composer", "--ansi"]
+ENTRYPOINT ["docker-entrypoint.sh"]
+CMD ["--ansi"]
